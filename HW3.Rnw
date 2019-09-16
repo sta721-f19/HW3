@@ -64,15 +64,15 @@ explanation in a couple of sentences with the actual estimates.  Full credit for
   theorem from class to show that each of the individual coefficients
   of the dummy variables and intercept are not estimable.
 
-\item   The {\tt epredictT function assumes that  the intercept is always included, so any linear combination of $\b$
+\item   The {\tt epredict} function assumes that  the intercept is always included, so any linear combination of $\b$
   always has the intercept added which means we cannot use the
   function to see if individual $\beta_j$ are estimable via a
   $\lambdab = (0, 0, 1, \ldots 0)^T$. Create a new variable that is a
   column of ones  {\tt Prostate\$Int = rep(1, n)} and fit the model
-  using the formula {\tt lpsa \sim  Int + D6 + D7  + D8 + D9 -1}
+  using the formula {\tt lpsa $\sim$  Int + D6 + D7  + D8 + D9 -1}
   where {\tt D7} is the dummy variable indication that the gleason score is
-  7 and `-1` drops the column of ones added by default.    Create a data
-  frame for predicting that will let you demonstrate with {\tt epredict} that none of the individual $\beta_j$ are estimable.
+  7 and {\tt -1} drops the column of ones added by default.    Create a data
+  frame for predicting that will let you demonstrate with {\tt epredict} that none of the individual $\beta_j$ are estimable.  Does your function come to the same conclusion?
 
 \end{enumerate}
 \end{document}
