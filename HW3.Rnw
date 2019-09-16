@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{url,hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,array,comment,eucal}
+\input{macros}
+\usepackage{fullpage}
+
+\begin{document}
+\title{Homework 2: STA 721 Fall19}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+Consider the linear model $\Y = \X\b + \eps$ with $\E[\eps] = \zero_n$ and $\Cov(\eps) = \sigma^2 \I_n$.
+\begin{enumerate}
+  \item Show that $\P_{\X^T} = (\X^T\X) (\X^T\X)^{-}$ is a projection
+  onto the column space of $\X^T$  where $(\X^T\X)^{-}$ is a generalized inverse of $\X^T\X$.  Does this depend on the actual choice of generalized inverse?
+  (explain)  Is this an orthogonal projection?
+
+\item Show that for an estimable function $\lambdab = \X^T \a$  with
+  $\a \in C(\X)$ that $(\I_p - \P_{\X^T}) \lambdab = 0$
+
+\item  Using the spectral decomposition of $(\X^T\X)$ and the
+  Moore-Penrose generalized inverse (see class notes) find a simple
+  expression for $\I - \P_{\X^T}$ in terms of a reduced set of the eigenvectors of   $\X^T\X$.
+
+\item If $\X$ is full column rank $p$, does a Best Linear Unbiased
+  Prediction (BLUP) exist for all $\x* \in \bbR^{p}$ ($\x_* \neq \zero$)?  Prove or Disprove.
+
+\item Write a function in \R  to  find the projection
+$(\I_p - \P_{\X^T}) \lambdab$   with the design matrix $\X$ (with intercept) and $\lambdab$ (vector or  matrix) as input.
+  Apply your function  to the example from class and compare to the
+  conclusions from  {\tt epredict}.   What sort of tolerance do you need to
+ decide if $(\I_p - \P_{\X^T}) \lambdab = 0$?.   Optional challenge -
+ have your function return the estimates, SE and confidence intervals!
+  For the really energetic student,  have the argument be a model object and $\lambdab$.
+
+
+\item  For the Prostate data:  create dummy or indicator
+   variables for each of the levels of the {\tt gleason}
+   scores and show that the design matrix with all dummy variables and a column of ones has columns that are linearly dependent.
+   Add to the dataframe.   e.g.
+   {\tt Prostate\$D7 = (gleason ==  7)} from base R or use  {\tt mutate} from {\tt dplyr}):
+
+<<warning=FALSE>>=
+suppressMessages(library(dplyr))
+data(Prostate, package="lasso2")
+Prostate = mutate(Prostate, D6 = gleason == 6,
+                            D7 = gleason == 7)
+@
+
+
+
+\item Fit a linear model of with response {\tt lcavol}  including all
+  of the dummy variables and the intercept. What are the coefficients?  If you change the order that the dummy variables enter the model formula, what happens to the coefficients and their interpretations? If you force the intercept to be zero (add -1 to the formula) what are the results and interpretations?
+
+\item Using {\tt as.factor(gleason)} as a predictor in {\tt lm}, what is the
+  equivalent model formula using dummy variables?  See
+  {\tt model.matrix} to extract the design matrix.
+What are the interpretation for these coefficients?  (provide an
+explanation in a couple of sentences with the actual estimates.  Full credit for interpretation with original units!)
+
+\item In the model with all dummy variables and the intercept, use the
+  theorem from class to show that each of the individual coefficients
+  of the dummy variables and intercept are not estimable.
+
+\item   The {\tt epredictT function assumes that  the intercept is always included, so any linear combination of $\b$
+  always has the intercept added which means we cannot use the
+  function to see if individual $\beta_j$ are estimable via a
+  $\lambdab = (0, 0, 1, \ldots 0)^T$. Create a new variable that is a
+  column of ones  {\tt Prostate\$Int = rep(1, n)} and fit the model
+  using the formula {\tt lpsa \sim  Int + D6 + D7  + D8 + D9 -1}
+  where {\tt D7} is the dummy variable indication that the gleason score is
+  7 and `-1` drops the column of ones added by default.    Create a data
+  frame for predicting that will let you demonstrate with {\tt epredict} that none of the individual $\beta_j$ are estimable.
+
+\end{enumerate}
+\end{document}
