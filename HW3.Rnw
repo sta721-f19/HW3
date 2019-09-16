@@ -22,7 +22,7 @@ Consider the linear model $\Y = \X\b + \eps$ with $\E[\eps] = \zero_n$ and $\Cov
 
 \item  Using the spectral decomposition of $(\X^T\X)$ and the
   Moore-Penrose generalized inverse (see class notes) find a simple
-  expression for $\I - \P_{\X^T}$ in terms of a reduced set of the eigenvectors of   $\X^T\X$.
+  expression for $\I - \P_{\X^T}$ in terms of a reduced set of the eigenvectors of $\X^T\X$.
 
 \item If $\X$ is full column rank $p$, does a Best Linear Unbiased
   Prediction (BLUP) exist for all $\x* \in \bbR^{p}$ ($\x_* \neq \zero$)?  Prove or Disprove.
