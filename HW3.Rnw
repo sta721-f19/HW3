@@ -46,7 +46,10 @@ $(\I_p - \P_{\X^T}) \lambdab$   with the design matrix $\X$ (with intercept) and
 suppressMessages(library(dplyr))
 data(Prostate, package="lasso2")
 Prostate = mutate(Prostate, D6 = gleason == 6,
-                            D7 = gleason == 7)
+                            D7 = gleason == 7,
+                            D8 = gleason == 8,
+                            D9 = gleason == 9)
+
 @
 
 
